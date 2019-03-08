@@ -50,6 +50,8 @@ if (!is_null($events['events'])) {
         $userMessage = $events['events'][0]['message']['text']; 
 	$replyToken = $events['events'][0]['replyToken'];
 	$idMessage = $events['events'][0]['message']['id']; 
+	$fileName = $events['events'][0]['message']['fileName']; 
+	
 
 	$httpClient = new CurlHTTPClient($access_token);
 	$bot = new LINEBot($httpClient, array('channelSecret' => $channelSecret ));	
@@ -61,7 +63,6 @@ if (!is_null($events['events'])) {
     	//$replyData = new TextMessageBuilder($msgType);  	
 	//$response = $bot->replyMessage($replyToken,$replyData);
 	
-	$fileName=$event['message']['fileName'];
  	$replyData = new TextMessageBuilder($fileName);	  	
  	$response = $bot->replyMessage($replyToken,$replyData);	
 	
