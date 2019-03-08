@@ -61,7 +61,10 @@ if (!is_null($events['events'])) {
     	//$replyData = new TextMessageBuilder($msgType);  	
 	//$response = $bot->replyMessage($replyToken,$replyData);
 	
-
+	$fileName=$event['message']['type'];
+ 	$replyData = new TextMessageBuilder($fileName);	  	
+ 	$response = $bot->replyMessage($replyToken,$replyData);	
+	
 	$response = $bot->getMessageContent($idMessage);
 	if ($response->isSucceeded()) {
 	    $dataBinary = $response->getRawBody(); 
