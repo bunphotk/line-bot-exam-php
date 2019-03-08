@@ -55,10 +55,12 @@ if (!is_null($events['events'])) {
 	
 	//$textMessageBuilder = new TextMessageBuilder(json_encode($events));
 	//$response = $bot->replyMessage($replyToken,$textMessageBuilder); 
-	$response = $bot->replyMessage($replyToken,$typeMessage); 
+	$reply = new TextMessageBuilder($typeMessage);
+	$response = $bot->replyMessage($replyToken,$reply); 
 	switch ($typeMessage){
 		case 'text':
-            	
+            		
+			break; 
 		default:
 			$textReplyMessage = json_encode($events);
 			$replyData = new TextMessageBuilder($textReplyMessage);         
