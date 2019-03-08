@@ -50,8 +50,8 @@ if (!is_null($events['events'])) {
         $userMessage = $events['events'][0]['message']['text']; 
 	$replyToken = $events['events'][0]['replyToken'];
 
-	$httpClient = new CurlHTTPClient(LINE_MESSAGE_ACCESS_TOKEN);
-	$bot = new LINEBot($httpClient, array('channelSecret' => LINE_MESSAGE_CHANNEL_SECRET));	
+	$httpClient = new CurlHTTPClient($access_token);
+	$bot = new LINEBot($httpClient, array('channelSecret' => $channelSecret ));	
 	
 	$textMessageBuilder = new TextMessageBuilder(json_encode($events));
 	$response = $bot->replyMessage($replyToken,$textMessageBuilder); 
