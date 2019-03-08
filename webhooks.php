@@ -61,20 +61,11 @@ if (!is_null($events['events'])) {
     	//$replyData = new TextMessageBuilder($msgType);  	
 	//$response = $bot->replyMessage($replyToken,$replyData);	
 	
-	//if($msgType=='file'){
-		$response = $bot->getMessageContent($idMessage);
-		if ($response->isSucceeded()) {
-		    $dataBinary = $response->getRawBody(); 
-		    $dataHeader = $response->getHeaders();   
-		    $replyData = new TextMessageBuilder(json_encode($dataHeader));
-		    $response = $bot->replyMessage($replyToken,$replyData);		
-		}	
-	//}
 	switch ($msgType){
 		case 'text':
             		
 			break; 
-		case 'file':
+		case case (preg_match('/[file]/',$typeMessage) ? true : false) :
 			$response = $bot->getMessageContent($idMessage);
 			if ($response->isSucceeded()) {
 			    $dataBinary = $response->getRawBody(); 
