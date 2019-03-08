@@ -59,19 +59,27 @@ if (!is_null($events['events'])) {
     	$replyData = new TextMessageBuilder($textReplyMessage);  	
 	$response = $bot->replyMessage($replyToken,$replyData);	
 	
-	/*
-	$reply = new TextMessageBuilder($typeMessage);
-	$response = $bot->replyMessage($replyToken,$reply); 
 	switch ($typeMessage){
 		case 'text':
             		
 			break; 
+		case 'file':
+			$response = $bot->getMessageContent($idMessage);
+			if ($response->isSucceeded()) {
+			    $dataBinary = $response->getRawBody(); 
+			    $dataHeader = $response->getHeaders();   
+			    $replyData = new TextMessageBuilder(json_encode($dataHeader));
+			    $response = $bot->replyMessage($replyToken,$replyData);		
+			    break;
+			}
+			$failMessage = json_encode($idMessage.' '.$response->getHTTPStatus() . ' ' . $response->getRawBody());
+			$replyData = new TextMessageBuilder($failMessage);             		
+			break; 			
 		default:
 			$textReplyMessage = json_encode($events);
 			$replyData = new TextMessageBuilder($textReplyMessage);         
                 	break; 			
 	}
-	*/
 }
 echo "OK";
 
