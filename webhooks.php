@@ -60,15 +60,16 @@ if (!is_null($events['events'])) {
     	//$msgType = $typeMessage;             
     	//$replyData = new TextMessageBuilder($msgType);  	
 	//$response = $bot->replyMessage($replyToken,$replyData);	
-
-	$response = $bot->getMessageContent($idMessage);
-	if ($response->isSucceeded()) {
-	    $dataBinary = $response->getRawBody(); 
-	    $dataHeader = $response->getHeaders();   
-	    $replyData = new TextMessageBuilder(json_encode($dataHeader));
-	    $response = $bot->replyMessage($replyToken,$replyData);		
-	}	
 	
+	if($msgType=='file'){
+		$response = $bot->getMessageContent($idMessage);
+		if ($response->isSucceeded()) {
+		    $dataBinary = $response->getRawBody(); 
+		    $dataHeader = $response->getHeaders();   
+		    $replyData = new TextMessageBuilder(json_encode($dataHeader));
+		    $response = $bot->replyMessage($replyToken,$replyData);		
+		}	
+	}
 	switch ($msgType){
 		case 'text':
             		
