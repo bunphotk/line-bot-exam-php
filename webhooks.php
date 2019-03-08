@@ -55,7 +55,7 @@ if (!is_null($events['events'])) {
 	
 	//$textMessageBuilder = new TextMessageBuilder(json_encode($events));
 	//$response = $bot->replyMessage($replyToken,$textMessageBuilder); 
-    	$textReplyMessage = 'สวัสดีครับ';             
+    	$textReplyMessage = $typeMessage;             
     	$replyData = new TextMessageBuilder($textReplyMessage);  	
 	$response = $bot->replyMessage($replyToken,$replyData);	
 	
