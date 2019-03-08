@@ -56,9 +56,10 @@ if (!is_null($events['events'])) {
 	
 	//$textMessageBuilder = new TextMessageBuilder(json_encode($events));
 	//$response = $bot->replyMessage($replyToken,$textMessageBuilder); 
-    	$msgType = $typeMessage;             
-    	$replyData = new TextMessageBuilder($msgType);  	
-	$response = $bot->replyMessage($replyToken,$replyData);	
+	
+    	//$msgType = $typeMessage;             
+    	//$replyData = new TextMessageBuilder($msgType);  	
+	//$response = $bot->replyMessage($replyToken,$replyData);	
 	
 	switch ($msgType){
 		case 'text':
