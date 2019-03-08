@@ -55,7 +55,8 @@ if (!is_null($events['events'])) {
 			   
 			//send_dat($data,$url,$access_token);
     
-		    }elseif($event['message']['type'] == 'file'){
+		    } elseif(false){ 
+			//elseif($event['message']['type'] == 'file'){
 			/* 
 			// Get Message id sent
 			$msgId = $event['message']['id'];
