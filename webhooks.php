@@ -39,9 +39,7 @@ if (!is_null($events['events'])) {
 		    }elseif($event['message']['type'] == 'file'){
 			// Get Message id sent
 			$msgId = $event['message']['id'];
-			// Get file name
-			$fileName = $event['message']['fileName'];   
-			// Get connent (file) from Line
+			// Get connent (file) from Line Chat
 			$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
 			$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $channelSecret]);			    			    
 			$response = $bot->getMessageContent($msgId);
@@ -50,7 +48,7 @@ if (!is_null($events['events'])) {
 			    fwrite($tempfile, $response->getRawBody());
 			    // Change your webserverice URL here	
 			    $url="http://mkss.co.th/fotk/rxfile.php";	
-			    send_file($tempfile,$url,$fileName);  	
+			    send_file($response,$url);  	
 			} else {
 			    error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
 			}			    
@@ -76,7 +74,7 @@ function send_dat($data,$url,$access_token){
 	echo $result . "\r\n";	
 }
 
-function send_file($file,$url,$fileName){
+function send_file($file,$url){
 
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
@@ -85,7 +83,6 @@ function send_file($file,$url,$fileName){
 	curl_setopt($ch, CURLOPT_POST, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, array(
 		'file' => $file,
-		'fileName' => $fileName
 	));
 	$result = curl_exec($ch);
 	curl_close($ch);
