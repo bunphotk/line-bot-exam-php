@@ -56,11 +56,7 @@ if (!is_null($events['events'])) {
 			$response = $bot->replyMessage($replyToken,$textMessageBuilder);   
  			
 		    }
-		     
-		     if($event['message']['type'] == 'file'){
-			     
-		     }
-		      
+
 	     }  
 	}
 }
