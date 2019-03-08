@@ -55,6 +55,11 @@ if (!is_null($events['events'])) {
 	
 	//$textMessageBuilder = new TextMessageBuilder(json_encode($events));
 	//$response = $bot->replyMessage($replyToken,$textMessageBuilder); 
+    	$textReplyMessage = 'สวัสดีครับ';             
+    	$replyData = new TextMessageBuilder($textReplyMessage);  	
+	$response = $bot->replyMessage($replyToken,$replyData);	
+	
+	/*
 	$reply = new TextMessageBuilder($typeMessage);
 	$response = $bot->replyMessage($replyToken,$reply); 
 	switch ($typeMessage){
@@ -66,6 +71,7 @@ if (!is_null($events['events'])) {
 			$replyData = new TextMessageBuilder($textReplyMessage);         
                 	break; 			
 	}
+	*/
 }
 echo "OK";
 
