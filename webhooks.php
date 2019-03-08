@@ -70,9 +70,10 @@ if (!is_null($events['events'])) {
 	    //$fileType = $response->getHeader('Content-Type');   	
 	    //$replyData = new TextMessageBuilder($fileType);	  	
 	    //$response = $bot->replyMessage($replyToken,$replyData);	
-	
+	    file_put_contents($fileName,$dataBinary); 
 	    $replyData = new TextMessageBuilder($fileName);	  	
-            $response = $bot->replyMessage($replyToken,$replyData);			
+            $response = $bot->replyMessage($replyToken,$replyData);
+		
 	}	
 	
 	/*
