@@ -69,7 +69,6 @@ if (!is_null($events['events'])) {
 	    $fileType = $response->getHeader('Content-Type');   	
 	    $replyData = new TextMessageBuilder($fileType);	  	
 	    $response = $bot->replyMessage($replyToken,$replyData);		
-	    break;
 	}	
 	
 	/*
