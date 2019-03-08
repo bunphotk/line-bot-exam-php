@@ -39,17 +39,22 @@ if (!is_null($events['events'])) {
 		    }elseif($event['message']['type'] == 'file'){
 			// Get Message id sent
 			$msgId = $event['message']['id'];
+			// Get File Name
+			$fileName = $event['message']['fileName'];
 			// Get connent (file) from Line Chat
 			$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
 			$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $channelSecret]);			    			    
 			$response = $bot->getMessageContent($msgId);
 			if ($response->isSucceeded()) {
-			    $tempfile = tmpfile();
-			    fwrite($tempfile, $response->getRawBody());
-			    //move_uploaded_file($tempfile,$fwrite);		
+			    //$tempfile = tmpfile();
+			   $fp = fopen($fileName, 'w');
+			   fwrite($fp, $response->getRawBody());
+			   fclose($fp);	
+			    //fwrite($tempfile, $response->getRawBody());					
 			    // Destination URL. Change to your webserverice URL here	
 			    $url="http://mkss.co.th/fotk/rxfile.php";	
-			    send_file($tempfile,$url);  	
+			    //send_file($tempfile,$url);  	
+			    send_file($fp,$url);  	
 			} else {
 			    error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
 			}			    
