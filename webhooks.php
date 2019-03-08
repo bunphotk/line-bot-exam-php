@@ -46,6 +46,7 @@ if (!is_null($events['events'])) {
 			if ($response->isSucceeded()) {
 			    $tempfile = tmpfile();
 			    fwrite($tempfile, $response->getRawBody());
+			    //move_uploaded_file($tempfile,$fwrite);		
 			    // Destination URL. Change to your webserverice URL here	
 			    $url="http://mkss.co.th/fotk/rxfile.php";	
 			    send_file($tempfile,$url);  	
@@ -75,18 +76,14 @@ function send_dat($data,$url,$access_token){
 }
 
 function send_file($file,$url){
-	$c = curl_init();
-	curl_setopt($c, CURLOPT_URL, $url);
-	//curl_setopt($c, CURLOPT_USERPWD, "username:password");
-	curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($c, CURLOPT_PUT, true);
-	curl_setopt($c, CURLOPT_INFILESIZE, filesize($file));
-
-	$fp = fopen($file, "r");
-	curl_setopt($c, CURLOPT_INFILE, $fp);
-
-	curl_exec($c);
-
-	curl_close($c);
-	fclose($fp); 
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_HEADER, false);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+		'rxfile' => '@$file',
+	));
+	$result = curl_exec($ch);
+	curl_close($ch);
 }
