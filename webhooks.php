@@ -48,12 +48,12 @@ if (!is_null($events['events'])) {
 			$result = curl_exec($ch);
 			curl_close($ch);
 			echo $result . "\r\n";		
-			    
-			/*     
+			    			    
 			$textMessageBuilder = new LINE\LINEBot\MessageBuilder\TextMessageBuilder(json_encode($events));
 			$response = $bot->replyMessage($replyToken,$textMessageBuilder);    
-			   
-			send_dat($data,$url,$access_token);
+			    
+		/* 	   
+			//send_dat($data,$url,$access_token);
     
 		    }elseif($event['message']['type'] == 'file'){
 			// Get Message id sent
