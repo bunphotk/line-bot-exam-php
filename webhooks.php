@@ -61,7 +61,7 @@ if (!is_null($events['events'])) {
     	//$replyData = new TextMessageBuilder($msgType);  	
 	//$response = $bot->replyMessage($replyToken,$replyData);
 	
-	$fileName=$event['message']['type'];
+	$fileName=$event['message']['fileName'];
  	$replyData = new TextMessageBuilder($fileName);	  	
  	$response = $bot->replyMessage($replyToken,$replyData);	
 	
