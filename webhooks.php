@@ -49,17 +49,18 @@ if (!is_null($events['events'])) {
 	$typeMessage = $events['events'][0]['message']['type'];
         $userMessage = $events['events'][0]['message']['text']; 
 	$replyToken = $events['events'][0]['replyToken'];
+	$idMessage = $events['events'][0]['message']['id']; 
 
 	$httpClient = new CurlHTTPClient($access_token);
 	$bot = new LINEBot($httpClient, array('channelSecret' => $channelSecret ));	
 	
 	//$textMessageBuilder = new TextMessageBuilder(json_encode($events));
 	//$response = $bot->replyMessage($replyToken,$textMessageBuilder); 
-    	$textReplyMessage = $typeMessage;             
-    	$replyData = new TextMessageBuilder($textReplyMessage);  	
+    	$msgType = $typeMessage;             
+    	$replyData = new TextMessageBuilder($msgType);  	
 	$response = $bot->replyMessage($replyToken,$replyData);	
 	
-	switch ($typeMessage){
+	switch ($msgType){
 		case 'text':
             		
 			break; 
