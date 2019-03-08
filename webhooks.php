@@ -61,7 +61,7 @@ if (!is_null($events['events'])) {
     	//$replyData = new TextMessageBuilder($msgType);  	
 	//$response = $bot->replyMessage($replyToken,$replyData);	
 	
-	if($msgType=='file'){
+	//if($msgType=='file'){
 		$response = $bot->getMessageContent($idMessage);
 		if ($response->isSucceeded()) {
 		    $dataBinary = $response->getRawBody(); 
@@ -69,7 +69,7 @@ if (!is_null($events['events'])) {
 		    $replyData = new TextMessageBuilder(json_encode($dataHeader));
 		    $response = $bot->replyMessage($replyToken,$replyData);		
 		}	
-	}
+	//}
 	switch ($msgType){
 		case 'text':
             		
