@@ -51,40 +51,9 @@ if (!is_null($events['events'])) {
 									
 				$textMessageBuilder = new LINE\LINEBot\MessageBuilder\TextMessageBuilder(json_encode($events));
 				$response = $bot->replyMessage($replyToken,$textMessageBuilder);    
-					
-				   
-				//send_dat($data,$url,$access_token);
-    			
+ 			
 		    } 
-		     
-		    /*
-		    if($event['message']['type'] == 'file'){
-			
-			// Get Message id sent
-			$msgId = $event['message']['id'];
-			// Get File Name
-			$fileName = $event['message']['fileName'];
-			// Get connent (file) from Line Chat
-			$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
-			$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $channelSecret]);			    			    
-			$response = $bot->getMessageContent($msgId);
-			if ($response->isSucceeded()) {
-			    //$tempfile = tmpfile();
-			   $fp = fopen('tmp.txt', 'w');
-			   fwrite($fp, '1234');	
-			   //fwrite($fp, $response->getRawBody());
-			   fclose($fp);	
-			    //fwrite($tempfile, $response->getRawBody());					
-			    // Destination URL. Change to your webserverice URL here	
-			    $url="http://mkss.co.th/fotk/rxfile.php";	
-			    //send_file($tempfile,$url);  	
-			    send_file("tmp.txt",$url);  	
-			} else {
-			    error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
-			}			    
-			  
-		    }
-		    */  	    
+		         
 	    }
 	}
 }
@@ -102,5 +71,5 @@ function send_file($file,$url){
 	$result = curl_exec($ch);
 	curl_close($ch);
 }
-*/
+
 ?>
