@@ -102,3 +102,4 @@ function send_file($file,$url){
 	curl_close($ch);
 }
 */
+?>
