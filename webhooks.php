@@ -65,20 +65,20 @@ if (!is_null($events['events'])) {
 	    file_put_contents($fileName,$dataBinary); // Save file to local host
 	    
 	   // ===== Change your webservice URL for forwarding the file to your URL=====
-		/*
-	    $url="http://mkss.co.th/fotk/rxfile.php";	
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_HEADER, 0);
+curl_setopt($ch, CURLOPT_VERBOSE, 0);
+curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible;)");
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_POST, true);
+$post = array(
+    'rxfile'=> "@$fileName"
+    
+);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+$response = curl_exec($ch);
 		
-	    $ch = curl_init();
-	    curl_setopt($ch, CURLOPT_URL, $url);
-	    curl_setopt($ch, CURLOPT_HEADER, false);
-	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POST, true);
-	    curl_setopt($ch, CURLOPT_POSTFIELDS, array(
-			'rxfile' => '@$fileName',
-	     ));
-	     $rslt = curl_exec($ch);
-	     curl_close($ch);	
-		*/
 	    // ==========================================================================
 	    $replyData = new TextMessageBuilder($fileName);	  	
             $response = $bot->replyMessage($replyToken,$replyData);
