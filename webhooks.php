@@ -59,23 +59,29 @@ if (!is_null($events['events'])) {
 	//$textMessageBuilder = new TextMessageBuilder(json_encode($events));
 	//$response = $bot->replyMessage($replyToken,$textMessageBuilder); 
 	
-    	//$msgType = $typeMessage;             
-    	//$replyData = new TextMessageBuilder($msgType);  	
-	//$response = $bot->replyMessage($replyToken,$replyData);
-	
 	$response = $bot->getMessageContent($idMessage);
 	if ($response->isSucceeded()) {
 	    $dataBinary = $response->getRawBody(); 
-	    //$dataHeader = $response->getHeaders();   
-	    //$fileType = $response->getHeader('Content-Type');   	
-	    //$replyData = new TextMessageBuilder($fileType);	  	
-	    //$response = $bot->replyMessage($replyToken,$replyData);	
-	    file_put_contents($fileName,$dataBinary); 
+	    file_put_contents($fileName,$dataBinary); // Save file to local host
+	    
+	   // ======= Change your webservice URL here so you can forward the file to your URL
+	    $url="http://mkss.co.th/fotk/rxfile.php";	
+		
+	    $ch = curl_init();
+	    curl_setopt($ch, CURLOPT_URL, $url);
+	    curl_setopt($ch, CURLOPT_HEADER, false);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POST, true);
+	    curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+			'rxfile' => '@$fileName',
+	     ));
+	     $result = curl_exec($ch);
+	     curl_close($ch);		
+	    // ==========================================================================
 	    $replyData = new TextMessageBuilder($fileName);	  	
             $response = $bot->replyMessage($replyToken,$replyData);
 		
 	}	
-	
 	/*
 	switch ($msgType){
 		case 'text':
