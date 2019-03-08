@@ -22,7 +22,10 @@ if (!is_null($events['events'])) {
 			$text = $event['source']['userId'];
 			// Get replyToken
 			$replyToken = $event['replyToken'];
-
+			    
+			$textMessageBuilder = new LINE\LINEBot\MessageBuilder\TextMessageBuilder(json_encode($events));
+			$response = $bot->replyMessage($replyToken,$textMessageBuilder);    
+			/*    
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
@@ -36,6 +39,8 @@ if (!is_null($events['events'])) {
 				'messages' => [$messages],
 			];
 			send_dat($data,$url,$access_token);
+			    
+			*/
 			    
 		    }elseif($event['message']['type'] == 'file'){
 			// Get Message id sent
