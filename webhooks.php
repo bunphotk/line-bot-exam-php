@@ -72,7 +72,7 @@ if (!is_null($events['events'])) {
 	}
 }
 echo "OK";
-/*
+
 function send_dat($data,$url,$access_token){
 	$post = json_encode($data);
 	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
@@ -101,5 +101,5 @@ function send_file($file,$url){
 	$result = curl_exec($ch);
 	curl_close($ch);
 }
-*/
+
 ?>
