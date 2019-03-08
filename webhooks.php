@@ -3,7 +3,7 @@
 require "vendor/autoload.php";
 require_once('vendor/linecorp/line-bot-sdk/line-bot-sdk-tiny/LINEBotTiny.php');
 
-$access_token = 'QL46gru5cqi5vE193hJthYcvKvoTo/VphPqSP98aWchVGoNUkzurRAoBWws/X+Oki+nVB1dqb5kQeEordqqCyBoOZjdxRJtfGWSwSYemHtmnozn9UQZuAJHDMqYa8IT1CmzK3YpuE83p1+V2+t1nfAdB04t89/1O/w1cDnyilFU=';
+$access_token = 'Lt6AODbxFcYOtK4gUFSaYnoxnxaHc48+yuEJuMm8VNcKvx2m6sEzvCrHqEcYD2Umi+nVB1dqb5kQeEordqqCyBoOZjdxRJtfGWSwSYemHtmT6xiSq+Ohpm4sB6/1gxYiEBzBIsvcUj5yFBqnpTUI6wdB04t89/1O/w1cDnyilFU=';
 $channelSecret = 'c972278fed151c817193b66ba6aecd94';
 $channelId= '1552912759';
 
