@@ -52,10 +52,11 @@ if (!is_null($events['events'])) {
 			$textMessageBuilder = new LINE\LINEBot\MessageBuilder\TextMessageBuilder(json_encode($events));
 			$response = $bot->replyMessage($replyToken,$textMessageBuilder);    
 			    
-		/* 	   
+			   
 			//send_dat($data,$url,$access_token);
     
 		    }elseif($event['message']['type'] == 'file'){
+			/* 
 			// Get Message id sent
 			$msgId = $event['message']['id'];
 			// Get File Name
