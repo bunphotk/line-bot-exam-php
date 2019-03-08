@@ -18,9 +18,9 @@ if (!is_null($events['events'])) {
 	     // Reply only when message sent is in 'text' format
 	     
 	     if ($event['type'] == 'message' ) {
-		   /*  
+		     
 		    if($event['message']['type'] == 'text'){
-			    
+			  /*  
 				// Get text sent
 				$text = $event['source']['userId'];
 				// Get replyToken
@@ -54,9 +54,9 @@ if (!is_null($events['events'])) {
 									
 				$textMessageBuilder = new LINE\LINEBot\MessageBuilder\TextMessageBuilder(json_encode($events));
 				$response = $bot->replyMessage($replyToken,$textMessageBuilder);   
- 			
+ 			*/ 
 		    }
-		   */    
+		      
 	     }  
 	}
 }
