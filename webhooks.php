@@ -23,10 +23,6 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 			    
-			/*     
-			$textMessageBuilder = new LINE\LINEBot\MessageBuilder\TextMessageBuilder(json_encode($events));
-			$response = $bot->replyMessage($replyToken,$textMessageBuilder);    
-			   
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
@@ -39,10 +35,26 @@ if (!is_null($events['events'])) {
 				'replyToken' => $replyToken,
 				'messages' => [$messages],
 			];
+			    
+			$post = json_encode($data);
+			$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+			$result = curl_exec($ch);
+			curl_close($ch);
+			echo $result . "\r\n";		
+			    
+			/*     
+			$textMessageBuilder = new LINE\LINEBot\MessageBuilder\TextMessageBuilder(json_encode($events));
+			$response = $bot->replyMessage($replyToken,$textMessageBuilder);    
+			   
 			send_dat($data,$url,$access_token);
-			    
-			
-			    
+    
 		    }elseif($event['message']['type'] == 'file'){
 			// Get Message id sent
 			$msgId = $event['message']['id'];
@@ -72,7 +84,7 @@ if (!is_null($events['events'])) {
 	}
 }
 echo "OK";
-
+/*
 function send_dat($data,$url,$access_token){
 	$post = json_encode($data);
 	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
@@ -101,5 +113,5 @@ function send_file($file,$url){
 	$result = curl_exec($ch);
 	curl_close($ch);
 }
-
+*/
 ?>
