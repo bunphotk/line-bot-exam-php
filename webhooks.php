@@ -63,16 +63,16 @@ if (!is_null($events['events'])) {
     	//$replyData = new TextMessageBuilder($msgType);  	
 	//$response = $bot->replyMessage($replyToken,$replyData);
 	
- 	$replyData = new TextMessageBuilder($fileName);	  	
- 	$response = $bot->replyMessage($replyToken,$replyData);	
-	
 	$response = $bot->getMessageContent($idMessage);
 	if ($response->isSucceeded()) {
 	    $dataBinary = $response->getRawBody(); 
 	    //$dataHeader = $response->getHeaders();   
-	    $fileType = $response->getHeader('Content-Type');   	
-	    $replyData = new TextMessageBuilder($fileType);	  	
-	    $response = $bot->replyMessage($replyToken,$replyData);		
+	    //$fileType = $response->getHeader('Content-Type');   	
+	    //$replyData = new TextMessageBuilder($fileType);	  	
+	    //$response = $bot->replyMessage($replyToken,$replyData);	
+	
+	    $replyData = new TextMessageBuilder($fileName);	  	
+            $response = $bot->replyMessage($replyToken,$replyData);			
 	}	
 	
 	/*
