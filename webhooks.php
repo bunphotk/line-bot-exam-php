@@ -67,7 +67,6 @@ if (!is_null($events['events'])) {
 	    $dataHeader = $response->getHeaders();   
 	    $replyData = new TextMessageBuilder(json_encode($dataHeader));
 	    $response = $bot->replyMessage($replyToken,$replyData);		
-	    break;
 	}	
 	
 	switch ($msgType){
