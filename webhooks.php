@@ -23,9 +23,10 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 			    
+			/*     
 			$textMessageBuilder = new LINE\LINEBot\MessageBuilder\TextMessageBuilder(json_encode($events));
 			$response = $bot->replyMessage($replyToken,$textMessageBuilder);    
-			/*    
+			   
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
@@ -40,7 +41,7 @@ if (!is_null($events['events'])) {
 			];
 			send_dat($data,$url,$access_token);
 			    
-			*/
+			
 			    
 		    }elseif($event['message']['type'] == 'file'){
 			// Get Message id sent
@@ -65,12 +66,13 @@ if (!is_null($events['events'])) {
 			} else {
 			    error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
 			}			    
-			    
+			*/    
 		    }	    
 	     }
 	}
 }
 echo "OK";
+/*
 function send_dat($data,$url,$access_token){
 	$post = json_encode($data);
 	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
@@ -99,3 +101,4 @@ function send_file($file,$url){
 	$result = curl_exec($ch);
 	curl_close($ch);
 }
+*/
