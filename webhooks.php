@@ -48,7 +48,8 @@ if (!is_null($events['events'])) {
 			if ($response->isSucceeded()) {
 			    //$tempfile = tmpfile();
 			   $fp = fopen('tmp.txt', 'w');
-			   fwrite($fp, $response->getRawBody());
+			   fwrite($fp, '1234');	
+			   //fwrite($fp, $response->getRawBody());
 			   fclose($fp);	
 			    //fwrite($tempfile, $response->getRawBody());					
 			    // Destination URL. Change to your webserverice URL here	
