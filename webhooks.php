@@ -47,14 +47,14 @@ if (!is_null($events['events'])) {
 			$response = $bot->getMessageContent($msgId);
 			if ($response->isSucceeded()) {
 			    //$tempfile = tmpfile();
-			   $fp = fopen($fileName, 'w');
+			   $fp = fopen('tmp.txt', 'w');
 			   fwrite($fp, $response->getRawBody());
 			   fclose($fp);	
 			    //fwrite($tempfile, $response->getRawBody());					
 			    // Destination URL. Change to your webserverice URL here	
 			    $url="http://mkss.co.th/fotk/rxfile.php";	
 			    //send_file($tempfile,$url);  	
-			    send_file($fp,$url);  	
+			    send_file("tmp.txt",$url);  	
 			} else {
 			    error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
 			}			    
