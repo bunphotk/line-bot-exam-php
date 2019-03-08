@@ -51,10 +51,10 @@ if (!is_null($events['events'])) {
 				$result = curl_exec($ch);
 				curl_close($ch);
 				echo $result . "\r\n";		
-/* 									
+									
 				$textMessageBuilder = new LINE\LINEBot\MessageBuilder\TextMessageBuilder(json_encode($events));
 				$response = $bot->replyMessage($replyToken,$textMessageBuilder);   
- 			*/ 
+ 			
 		    }
 		      
 	     }  
