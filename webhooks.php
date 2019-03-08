@@ -46,9 +46,9 @@ if (!is_null($events['events'])) {
 			if ($response->isSucceeded()) {
 			    $tempfile = tmpfile();
 			    fwrite($tempfile, $response->getRawBody());
-			    // Change your webserverice URL here	
+			    // Destination URL. Change to your webserverice URL here	
 			    $url="http://mkss.co.th/fotk/rxfile.php";	
-			    send_file($response,$url);  	
+			    send_file($tempfile,$url);  	
 			} else {
 			    error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
 			}			    
@@ -82,7 +82,7 @@ function send_file($file,$url){
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_POST, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, array(
-		'file' => $file,
+		'rxfile' => $file,
 	));
 	$result = curl_exec($ch);
 	curl_close($ch);
