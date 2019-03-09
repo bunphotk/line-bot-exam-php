@@ -66,15 +66,13 @@ if (!is_null($events['events'])) {
 	    
 	   // ===== Change your webservice URL for forwarding the file to your URL=====
 		
-$url="http://mkss.co.th/fotk/rxfile.php";	
+$url='http://mkss.co.th/fotk/rxfile.php';		
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, array('rxfile' => '@fileName'));
 curl_setopt($ch, CURLOPT_URL, $url);
-$postData = array(
-    'rxfile' => '@$fileName',
-);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-$response = curl_exec($ch);
+curl_exec($ch);
+curl_close($ch);
 		
 	    // ==========================================================================
 	    $replyData = new TextMessageBuilder($fileName);	  	
