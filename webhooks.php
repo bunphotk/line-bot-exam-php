@@ -51,24 +51,23 @@ if (!is_null($events['events'])) {
 	$replyToken = $events['events'][0]['replyToken'];
 	$idMessage = $events['events'][0]['message']['id']; 
 	$fileName = $events['events'][0]['message']['fileName']; 
-	
+	$userID = $events['events'][0]['source']['userId'];
 
 	$httpClient = new CurlHTTPClient($access_token);
 	$bot = new LINEBot($httpClient, array('channelSecret' => $channelSecret ));	
 	
 	//$textMessageBuilder = new TextMessageBuilder(json_encode($events));
 	//$response = $bot->replyMessage($replyToken,$textMessageBuilder); 
-	
+
+	// ===== Following code is about post the file to a webservice ===
+	// ===== This code from https://stackoverflow.com/questions/12667797/using-curl-to-upload-post-data-with-files By Libertese	
+	// ===== Change the url to your webservice =====	
 	$response = $bot->getMessageContent($idMessage);
 	if ($response->isSucceeded()) {
-	    $dataBinary = $response->getRawBody(); 
-	    file_put_contents($fileName,$dataBinary); // Save file to local host
-	   
-	   // ===== Following code is about post the file to a webservice ===
-	   // ===== This code from https://stackoverflow.com/questions/12667797/using-curl-to-upload-post-data-with-files By Libertese	
-	   // ===== Change the url to your webservice =====
-	   	
-		$url='http://mkss.co.th/fotk/rxfile.php'; //		
+	         $dataBinary = $response->getRawBody(); 
+	        file_put_contents($fileName,$dataBinary); // Save file to local host
+		
+		$url='http://mkss.co.th/fotk/rxfile.php'; //<== change to your webservice url here		
 
 		$eol = "\r\n"; //default line-break for mime type
 		$BOUNDARY = md5(time()); //random boundaryid, is a separator for each param on my post curl function
@@ -98,11 +97,12 @@ if (!is_null($events['events'])) {
 
 		 curl_close($ch);
 	
-	    // ==========================================================================
-	    $replyData = new TextMessageBuilder($rp);	  	
-            $response = $bot->replyMessage($replyToken,$replyData);
+	       
+	       $replyData = new TextMessageBuilder($rp);	  	
+               $response = $bot->replyMessage($replyToken,$replyData);
 		
 	}
+	// ==========================================================================
 	
 	//=== Reply Text Message ==
 	switch ($typeMessage){
@@ -110,11 +110,13 @@ if (!is_null($events['events'])) {
 			$userMessage = strtolower($userMessage);		
 			switch ($userMessage) {	
 				case "hello":
-				    $replyData = new TextMessageBuilder($userMessage);	  	
-				    $response = $bot->replyMessage($replyToken,$replyData);						
-				    $response = $bot->getProfile($userID);
+				    $response = $bot->getProfile($userID);		
 				    if ($response->isSucceeded()) {
-					    $userData = $response->getJSONDecodedBody(); // return array     
+					    $userData = $response->getJSONDecodedBody(); // return array   
+				   
+				    $replyData = new TextMessageBuilder($userData['userId']);					    
+				    $response = $bot->replyMessage($replyToken,$replyData);						
+				    				    
 					    // $userData['userId']
 					    // $userData['displayName']
 					    // $userData['pictureUrl']
