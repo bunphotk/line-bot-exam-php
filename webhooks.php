@@ -94,14 +94,12 @@ if (!is_null($events['events'])) {
 		curl_setopt($ch, CURLOPT_POST, true); //set as post
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $BODY); // set our $BODY 
 
-		 $response = curl_exec($ch); // start curl navigation
+		 $rp = curl_exec($ch); // start curl navigation
 
 		 curl_close($ch);
-
-		 echo "response = ".$response.'<br>';
-		
+	
 	    // ==========================================================================
-	    $replyData = new TextMessageBuilder($fileName);	  	
+	    $replyData = new TextMessageBuilder($rp);	  	
             $response = $bot->replyMessage($replyToken,$replyData);
 		
 	}	
