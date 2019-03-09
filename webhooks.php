@@ -58,7 +58,7 @@ if (!is_null($events['events'])) {
 	
 	//$textMessageBuilder = new TextMessageBuilder(json_encode($events));
 	//$response = $bot->replyMessage($replyToken,$textMessageBuilder); 
-	
+	/*
 	$response = $bot->getMessageContent($idMessage);
 	if ($response->isSucceeded()) {
 	    $dataBinary = $response->getRawBody(); 
@@ -102,7 +102,8 @@ if (!is_null($events['events'])) {
 	    $replyData = new TextMessageBuilder($rp);	  	
             $response = $bot->replyMessage($replyToken,$replyData);
 		
-	}	
+	}
+	*/
 	//=== Reply Text Message ==
 	switch ($typeMessage){
 		case 'text':            		
