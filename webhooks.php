@@ -103,29 +103,33 @@ if (!is_null($events['events'])) {
             $response = $bot->replyMessage($replyToken,$replyData);
 		
 	}	
-	/*
+	//=== Reply Text Message ==
 	switch ($msgType){
-		case 'text':
-            		
-			break; 
-		case case (preg_match('/[file]/',$typeMessage) ? true : false) :
-			$response = $bot->getMessageContent($idMessage);
-			if ($response->isSucceeded()) {
-			    $dataBinary = $response->getRawBody(); 
-			    $dataHeader = $response->getHeaders();   
-			    $replyData = new TextMessageBuilder(json_encode($dataHeader));
-			    $response = $bot->replyMessage($replyToken,$replyData);		
-			    break;
-			}
-			$failMessage = json_encode($idMessage.' '.$response->getHTTPStatus() . ' ' . $response->getRawBody());
-			$replyData = new TextMessageBuilder($failMessage);             		
-			break; 			
+		case 'text':            		
+			$userMessage = strtolower($userMessage); 
+			switch ($userMessage) {	
+				case "hello":
+				    $response = $bot->getProfile($userID);
+				    if ($response->isSucceeded()) {
+					    $userData = $response->getJSONDecodedBody(); // return array     
+					    // $userData['userId']
+					    // $userData['displayName']
+					    // $userData['pictureUrl']
+					    // $userData['statusMessage']					    
+					    $replyData = new TextMessageBuilder('Hello '.$userData['displayName']);	  	
+					    $response = $bot->replyMessage($replyToken,$replyData);
+				    }		    
+				default:
+				    break; 	
+			}		
+			
+			break; 		
 		default:
-			$textReplyMessage = json_encode($events);
-			$replyData = new TextMessageBuilder($textReplyMessage);         
+			//$textReplyMessage = json_encode($events);
+			//$replyData = new TextMessageBuilder($textReplyMessage);         
                 	break; 			
 	}
-	*/
+	
 }
 echo "OK";
 
