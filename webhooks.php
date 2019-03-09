@@ -113,15 +113,16 @@ if (!is_null($events['events'])) {
 				    $response = $bot->getProfile($userID);		
 				    if ($response->isSucceeded()) {
 					    $userData = $response->getJSONDecodedBody(); // return array   
-				   
-				    $replyData = new TextMessageBuilder($userData['userId']);					    
+				    $userID=$userData['userId'];
+				    $replyData = new TextMessageBuilder($userID);					    
 				    $response = $bot->replyMessage($replyToken,$replyData);						
 				    				    
 					    // $userData['userId']
 					    // $userData['displayName']
 					    // $userData['pictureUrl']
-					    // $userData['statusMessage']					    
-					    $replyData = new TextMessageBuilder('Hello '.$userData['displayName']);	  	
+					    // $userData['statusMessage']
+					    $rpTxt='Hello '.$userData['displayName'];
+					    $replyData = new TextMessageBuilder($rpTxt);	  	
 					    $response = $bot->replyMessage($replyToken,$replyData);
 				    }		    
 				default:
