@@ -113,9 +113,9 @@ if (!is_null($events['events'])) {
 				    $response = $bot->getProfile($userID);		
 				    if ($response->isSucceeded()) {
 					    $userData = $response->getJSONDecodedBody(); // return array   
-				    $userID=$userData['userId'];
-				    $replyData = new TextMessageBuilder($userID);					    
-				    $response = $bot->replyMessage($replyToken,$replyData);						
+				   // $userID=$userData['userId'];
+				   // $replyData = new TextMessageBuilder($userID);					    
+				   // $response = $bot->replyMessage($replyToken,$replyData);						
 				    				    
 					    // $userData['userId']
 					    // $userData['displayName']
