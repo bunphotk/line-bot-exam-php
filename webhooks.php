@@ -107,11 +107,11 @@ if (!is_null($events['events'])) {
 	//=== Reply Text Message ==
 	switch ($typeMessage){
 		case 'text':         				
-			$userMessage = strtolower($userMessage);
-			    $replyData = new TextMessageBuilder($userMessage);	  	
-			    $response = $bot->replyMessage($replyToken,$replyData);			
+			$userMessage = strtolower($userMessage);		
 			switch ($userMessage) {	
 				case "hello":
+				    $replyData = new TextMessageBuilder($userMessage);	  	
+				    $response = $bot->replyMessage($replyToken,$replyData);						
 				    $response = $bot->getProfile($userID);
 				    if ($response->isSucceeded()) {
 					    $userData = $response->getJSONDecodedBody(); // return array     
