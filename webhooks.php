@@ -104,7 +104,7 @@ if (!is_null($events['events'])) {
 		
 	}	
 	//=== Reply Text Message ==
-	switch ($msgType){
+	switch ($typeMessage){
 		case 'text':            		
 			$userMessage = strtolower($userMessage); 
 			switch ($userMessage) {	
