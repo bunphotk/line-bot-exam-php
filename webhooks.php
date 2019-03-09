@@ -63,16 +63,42 @@ if (!is_null($events['events'])) {
 	if ($response->isSucceeded()) {
 	    $dataBinary = $response->getRawBody(); 
 	    file_put_contents($fileName,$dataBinary); // Save file to local host
-	    
-	   // ===== Change your webservice URL for forwarding the file to your URL=====
-		
-$url='http://mkss.co.th/fotk/rxfile.php';		
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, array('rxfile' => '@fileName'));
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_exec($ch);
-curl_close($ch);
+	   
+	   // ===== Following code is about post the file to a webservice ===
+	   // ===== This code from https://stackoverflow.com/questions/12667797/using-curl-to-upload-post-data-with-files By Libertese	
+	   // ===== Change the url to your webservice =====
+	   	
+		$url='http://mkss.co.th/fotk/rxfile.php'; //		
+
+		$eol = "\r\n"; //default line-break for mime type
+		$BOUNDARY = md5(time()); //random boundaryid, is a separator for each param on my post curl function
+		$BODY=""; //init my curl body
+		$BODY.= '--'.$BOUNDARY. $eol; //start param header
+		$BODY .= 'Content-Disposition: form-data; name="filename"' . $eol . $eol; // last Content with 2 $eol, in this case is only 1 content.
+		$BODY .= "Some Data" . $eol;//param data in this case is a simple post data and 1 $eol for the end of the data
+		$BODY.= '--'.$BOUNDARY. $eol; // start 2nd param,
+		$BODY.= 'Content-Disposition: form-data; name="filename"; filename='.$fileName.$eol ; //first Content data for post file, remember you only put 1 when you are going to add more Contents, and 2 on the last, to close the Content Instance
+		$BODY.= 'Content-Type: application/octet-stream' . $eol; //Same before row
+		$BODY.= 'Content-Transfer-Encoding: base64' . $eol . $eol; // we put the last Content and 2 $eol,
+		$BODY.= chunk_split(base64_encode(file_get_contents($fileName))) . $eol; // we write the Base64 File Content and the $eol to finish the data,
+		$BODY.= '--'.$BOUNDARY .'--' . $eol. $eol; // we close the param and the post width "--" and 2 $eol at the end of our boundary header.
+
+		$ch = curl_init(); //init curl
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(					
+						"Content-Type: multipart/form-data; boundary=".$BOUNDARY) //setting our mime type for make it work on $_FILE variable
+					);
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/1.0 (Windows NT 6.1; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0'); //setting our user agent
+		curl_setopt($ch, CURLOPT_URL, $url); //setting our api post url
+		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1); // call return content
+		curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, 1); //navigate the endpoint
+		curl_setopt($ch, CURLOPT_POST, true); //set as post
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $BODY); // set our $BODY 
+
+		 $response = curl_exec($ch); // start curl navigation
+
+		 curl_close($ch);
+
+		 echo "response = ".$response.'<br>';
 		
 	    // ==========================================================================
 	    $replyData = new TextMessageBuilder($fileName);	  	
