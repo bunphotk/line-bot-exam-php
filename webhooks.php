@@ -105,10 +105,10 @@ if (!is_null($events['events'])) {
 	}
 	*/
 	//=== Reply Text Message ==
-	    $replyData = new TextMessageBuilder($typeMessage);	  	
-            $response = $bot->replyMessage($replyToken,$replyData);	
 	switch ($typeMessage){
-		case 'text':            		
+		case 'text':         
+			    $replyData = new TextMessageBuilder($typeMessage);	  	
+			    $response = $bot->replyMessage($replyToken,$replyData);				
 			$userMessage = strtolower($userMessage); 
 			switch ($userMessage) {	
 				case "hello":
